@@ -46,4 +46,12 @@ public String getProducts(Model model){
         return "product";
  }
 
+ @GetMapping("products/categories/{categorie}")
+    public String getProductByCategorie(@PathVariable String categorie, Model model){
+        List<Product> products = productService.getByCategorie(categorie);
+        model.addAttribute("products", products);
+        model.addAttribute("categorie", categorie);
+        return "productFilter";
+ }
+
 }

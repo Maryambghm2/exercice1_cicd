@@ -9,18 +9,18 @@ import java.util.Map;
 import java.util.UUID;
 
 @Service
-public class ProductService     {
+public class ProductService {
 
     private final Map<UUID, Product> products = new HashMap<>();
 
 
     public boolean create(String name, String category, double price) {
         Product newProduct = Product.builder().id(UUID.randomUUID()).name(name).category(category).price(price).build();
-       products.put(newProduct.getId(), newProduct);
+        products.put(newProduct.getId(), newProduct);
         return true;
     }
 
-    public List<Product> getAllProducts(){
+    public List<Product> getAllProducts() {
         return products.values().stream().toList();
     }
 
@@ -28,12 +28,21 @@ public class ProductService     {
         return products.get(id);
     }
 
-    public List<Product> getByCategorie(String categorie, int price ) {
+    public List<Product> getByCategorie(String categorie) {
+        // Deux conditions en meme temps
+//        return products.values().stream()
+//                .filter(p -> p.getCategory().equals(categorie) && p.getPrice() <= price)
+//        .toList();
         return products.values().stream()
-                .filter(p -> p.getCategory().equals(categorie) && p.getPrice() <= price)
-        .toList();
+                .filter(p -> p.getCategory().equals(categorie))
+                .toList();
     }
 
+    public List<Product> getByPriceMax(int priceMax) {
+        return products.values().stream()
+                .filter(p -> p.getPrice() <= priceMax)
+                .toList();
+    }
 
 
 }
