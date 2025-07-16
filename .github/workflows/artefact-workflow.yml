@@ -1,8 +1,8 @@
-name: artefact-workflow
+name: Demo Upload Artefact
 
 on:
   push:
-    branches: [ main,dev ]
+    branches: [main,dev]
 
 jobs:
   build:
@@ -15,10 +15,10 @@ jobs:
       - name: Simuler un build
         run: |
           mkdir -p target
-          echo "build factice" > taget/app-demo.jar
+          echo "build factice" > target/app-demo.jar
 
       - name: Upload artefact
-        if: success() && github.ref == 'refs/head/main'
+        if: success() && github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v4
         with:
           name: build_app
