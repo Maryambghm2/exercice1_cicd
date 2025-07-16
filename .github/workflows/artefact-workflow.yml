@@ -1,4 +1,4 @@
-name: artefact-workflow.yml
+name: artefact-workflow
 
 on:
   push:
