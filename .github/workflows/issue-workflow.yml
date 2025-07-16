@@ -1,0 +1,17 @@
+name: issue-workflow
+
+on:
+  issues:
+    types: opened
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: comments
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+          ISSUE_URL: ${{ secrets.event.issue.html_url }}
+        run: gh issue comment $ISSUE_URL -b "Bonjour Auteur, nous avons bien pris en compte votre problème du nom de Titre de l'issue"
